@@ -117,6 +117,7 @@ func (self *Webpage) SaveImage(body, name string) bool {
 	}
 	defer f.Close()
 	if _, err := f.WriteString(body); err == nil {
+		fmt.Println("Finished download image to url ==>", name)
 		return true
 	}
 	return false
@@ -191,12 +192,12 @@ forEnd:
 }
 
 func main() {
-	os.Mkdir("E:/girls", 0777)
+	os.Mkdir("E:/girls/11-20", 0777)
 	config := NewConfig(
-		"E:/girls/",
+		"E:/girls/11-20/",
 		400,
 		400,
-		12,
+		11,
 		20,
 		false,
 	)

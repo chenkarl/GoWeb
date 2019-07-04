@@ -2,6 +2,8 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
+	"log"
 	"net/http"
 )
 
@@ -9,6 +11,10 @@ import (
 type Post struct {
 	User string
 	Sex  string
+}
+
+type PostArr struct {
+	Post []*Post
 }
 
 func reloactionExample(w http.ResponseWriter, r *http.Request) {
@@ -22,8 +28,16 @@ func jsonExample(w http.ResponseWriter, r *http.Request) {
 		User: "Chen YuZhao",
 		Sex:  "Male",
 	}
-	j, _ := json.Marshal(post)
-	w.Write(j)
+	var postA []*Post
+	postA = append(postA, post)
+	postA = append(postA, post)
+	PostArr := &PostArr{
+		postA,
+	}
+	log.Println(PostArr)
+	j, _ := json.Marshal(PostArr)
+	fmt.Fprint(w, string(j))
+	//w.Write(j)
 }
 
 func main() {
